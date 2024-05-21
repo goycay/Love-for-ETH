@@ -1,0 +1,34 @@
+Unfortunately, the provided contexts do not contain actual code or a specific programming language to calculate the value of Ethereum. However, the following is a general Python function that uses the CoinMarketCap API to retrieve the current price of Ethereum in USD:
+
+```python
+import requests
+
+def get_eth_price():
+    api_url = "https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest"
+    parameters = {
+        "symbol": "ETH",
+        "convert": "USD"
+    }
+    headers = {
+        "X-CMC_PRO_API_KEY": "<insert your API key here>"
+    }
+
+    response = requests.get(api_url, params=parameters, headers=headers)
+
+    if response.status_code == 200:
+        data = response.json()
+        eth_data = data["data"]["ETH"]
+        return eth_data["quote"]["USD"]["price"]
+    else:
+        return None
+
+# Usage
+eth_price = get_eth_price()
+print("Current Ethereum price:", eth_price)
+```
+
+Note: To use this code, you will need to obtain a CoinMarketCap API key and replace `<insert your API key here>` with your actual API key. You can sign up for a free API key at https://coinmarketcap.com/api.
+
+This code uses the `requests` library to make an HTTP GET request to the CoinMarketCap API, passing the symbol "ETH" and the desired conversion currency ("USD"). The API response is then parsed as JSON, and the current price of Ethereum in USD is extracted from the response data.
+
+Remember to always follow the terms of use and rate limits of any API you use.
